@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using FluentValidation;
-using FluentValidation.Results;
 using System.ComponentModel.DataAnnotations;
 
 namespace Lambert.Domain.Entities
@@ -13,7 +12,7 @@ namespace Lambert.Domain.Entities
 			public DateTime InsertDate { get; set; }
 			public DateTime UpdateDate { get; set; }
 			public bool IsValid { get; set; }
-			public IList<ValidationFailure> Errors { get; set; }
+			public IList<string> Errors { get; set; }
 				
 			protected BaseEntity(TKeyType id = default)
 			{
@@ -23,7 +22,8 @@ namespace Lambert.Domain.Entities
 			protected void Validate<TEntity>(TEntity entity, AbstractValidator<TEntity> validator) {
 				var results = validator.Validate(entity);
 				IsValid = results.IsValid;
-				Errors = results.Errors;
+				Errors = new List<string>();
+				results.Errors.ForEach(error => Errors.Add(error.ErrorMessage));
 			}
 		}
 }
