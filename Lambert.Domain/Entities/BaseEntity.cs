@@ -24,6 +24,9 @@ namespace Lambert.Domain.Entities
 				IsValid = results.IsValid;
 				Errors = new List<string>();
 				results.Errors.ForEach(error => Errors.Add(error.ErrorMessage));
+
+				if(!IsValid)
+					throw new Exception(Errors.ToString());
 			}
 		}
 }

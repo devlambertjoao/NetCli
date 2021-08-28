@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Lambert.Domain.Interfaces.Repositories;
+using Lambert.Domain.Interfaces.Services;
+using Lambert.Infra.Repositories;
+using Lambert.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace Lambert.Application
@@ -32,6 +29,9 @@ namespace Lambert.Application
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Lambert.Application", Version = "v1" });
             });
+
+						services.AddScoped<ICarService, CarService>();
+						services.AddScoped<ICarRepository, CarRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

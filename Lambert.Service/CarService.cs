@@ -3,7 +3,6 @@ using Lambert.Domain.Interfaces.Services;
 using Lambert.Domain.Interfaces.Repositories;
 using Lambert.Domain.Entities;
 using Lambert.Service.Mappers;
-using System;
 
 namespace Lambert.Service
 {
@@ -12,20 +11,15 @@ namespace Lambert.Service
 			private readonly ICarRepository _carRepository;
 			private readonly CarMapper _carMapper;
 
-			public CarService(ICarRepository carRepository, CarMapper carMapper)
+			public CarService(ICarRepository carRepository)
 			{
 				_carRepository = carRepository;
-				_carMapper = carMapper;
+				_carMapper = new CarMapper();
 			}
 
       public CarSaveResponse Save(CarSaveRequest request)
 			{
 				CarEntity entity = _carMapper.ToEntity(new CarEntity(), request);
-				if(!entity.IsValid)
-				{
-					throw new Exception(entity.Errors.ToString());	
-				}
-				
 				_carRepository.Save(entity);
 
 				return new CarSaveResponse();

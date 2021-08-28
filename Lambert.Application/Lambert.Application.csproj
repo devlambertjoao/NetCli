@@ -8,4 +8,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lambert.Service\Lambert.Service.csproj" />
+    <ProjectReference Include="..\Lambert.Domain\Lambert.Domain.csproj" />
+    <ProjectReference Include="..\Lambert.Infra\Lambert.Infra.csproj" />
+  </ItemGroup>
+
 </Project>
