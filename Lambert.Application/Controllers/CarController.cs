@@ -24,7 +24,8 @@ namespace Lambert.Application.Controllers
     {
 			try
 			{
-				return Ok(_carService.Save(request));
+				_carService.Save(request);
+				return NoContent();
 			}
 			catch (Exception e)
 			{

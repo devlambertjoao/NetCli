@@ -15,7 +15,7 @@ namespace Lambert.Domain.Entities
     {
 			Model = arg.Model;
 			Year = arg.Year;
-			Color = arg.Color;
+            Color = Enum.Parse<CarColorEnum>(arg.Color.ToUpper());
 		
 			Validate(this, new CarValidator());
     }

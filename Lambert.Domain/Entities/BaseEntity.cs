@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using FluentValidation;
 using System.ComponentModel.DataAnnotations;
+using Lambert.Domain.Extensions;
 
 namespace Lambert.Domain.Entities
 {
@@ -26,7 +27,7 @@ namespace Lambert.Domain.Entities
 				results.Errors.ForEach(error => Errors.Add(error.ErrorMessage));
 
 				if(!IsValid)
-					throw new Exception(Errors.ToString());
+					throw new Exception(Errors.SplitComma());
 			}
 		}
 }
